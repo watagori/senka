@@ -1,0 +1,10 @@
+version: '3.3'
+
+services:
+  senka:
+    container_name: senka
+    build: ./
+    volumes:
+      - ./:/app/
+    command: /bin/bash
+    tty: true
