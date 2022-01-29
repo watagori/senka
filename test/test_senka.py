@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import *
-from src.senka.senka import Senka
+from senka.senka import Senka
 import os
 
 class TestSenka(unittest.TestCase):

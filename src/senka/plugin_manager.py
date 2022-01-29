@@ -6,9 +6,8 @@ import re
 
 class PluginManager():
   @classmethod
-  def get_plugins(cls, chain:str) -> List:
+  def get_plugins(cls, chain:str, path:str) -> List:
     plugins = []
-    path = '%s/../plugin' % os.path.dirname(__file__)
     files = os.listdir(path)
     dirs = sorted([f for f in files if os.path.isdir(os.path.join(path, f)) and "_plugin" in f and "." not in f])
     for dir in dirs:
@@ -18,6 +17,5 @@ class PluginManager():
       dir = "".join(dir)
       dir = re.sub("_(.)",lambda x:x.group(1).upper(), dir)
       plugin_class = getattr(module, dir)
-      plugins.append(plugin_class)
-
+      if plugin_class.chain.lower() == chain.lower(): plugins.append(plugin_class)
     return plugins
