@@ -7,6 +7,10 @@ if __name__ == '__main__':
   args = sys.argv
   chain = args[1]
   address = args[2]  
-  senka = Senka({"bscscan_key":os.environ['BSCSCAN_KEY']})
-  caaj = senka.get_caaj(chain, address)
+  setting = {}
+  if chain == 'bsc':
+    setting['bscscan_key'] = os.environ['BSCSCAN_KEY']
+  senka = Senka(setting)
+  caaj = senka.get_caaj_csv(chain, address)
   print(caaj)
+  
