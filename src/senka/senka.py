@@ -20,6 +20,7 @@ class Senka:
     return caaj_csv
 
   def get_caaj(self, chain:str, address:str) -> List[CaajJournal]:
+    token_original_ids = SenkaLib.get_token_original_ids()
     available_chains = self.get_available_chains()
     if chain.lower() not in available_chains:
       raise ValueError('this chain is not supported.')
@@ -32,7 +33,7 @@ class Senka:
     for transaction in transactions:
       for plugin in plugins:
         if plugin.can_handle(transaction):
-          caaj_peace = plugin.get_caajs(address, transaction)
+          caaj_peace = plugin.get_caajs(address, transaction, token_original_ids)
           caaj.extend(caaj_peace)
 
     return caaj
