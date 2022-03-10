@@ -5,7 +5,7 @@ def _requires_from_file(filename):
 
 setup(
     name='senka',
-    version='0.0.1',
+    version='0.0.2',
     license='mit',
     description='making journal for transactions on blockchain',
 
