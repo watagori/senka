@@ -9,8 +9,9 @@ import os
 pd.set_option("display.max_columns", 50)
 
 class Senka:
-  def __init__(self, setting_dict):
+  def __init__(self, setting_dict, setting_toml_path:str):
     self.setting = SenkaSetting(setting_dict)
+    self.setting_toml_path = setting_toml_path
     pass
  
   def get_caaj_csv(self, chain:str, address:str) -> str:
@@ -30,7 +31,7 @@ class Senka:
     caaj = []
     transaction_generator = list(filter(lambda x:x.chain.lower() == chain.lower(),SenkaLib.get_available_chain()))[0]
     transactions = transaction_generator.get_transactions(self.setting, address)
-    plugins = PluginManager.get_plugins(chain, self.get_plugin_dir_path())
+    plugins = PluginManager.get_plugins(chain, self.setting_toml_path)
 
     for transaction in transactions:
       for plugin in plugins:
@@ -46,6 +47,3 @@ class Senka:
     chains = SenkaLib.get_available_chain()
     chains = list(map(lambda x:x.chain,chains))
     return chains
-
-  def get_plugin_dir_path(self) -> str:
-    return '%s/../plugin' % os.path.dirname(__file__)
