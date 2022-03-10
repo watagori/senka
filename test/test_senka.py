@@ -5,6 +5,7 @@ from senkalib.senka_lib import SenkaLib
 from senkalib.chain.transaction_generator import TransactionGenerator
 from senkalib.senka_setting import SenkaSetting
 from senkalib.chain.transaction import Transaction
+from senkalib.caaj_journal_amount import CaajJournalAmount
 from typing import List
 from decimal import Decimal
 import os
@@ -33,30 +34,27 @@ class TestSenka(unittest.TestCase):
           senka = Senka({})
           caaj_list = senka.get_caaj('test_one', '0xfFceBED170CE0230D513a0a388011eF9c2F97503')
           cj = caaj_list[0]
-          amount = [
-            {
-              "token": {
-                "symbol":"testone",
-                "original_id":"ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED",
-                "symbol_uuid":"3a2570c5-15c4-2860-52a8-bff14f27a236"
-              },
-              "amount": "10"
-            }
-          ]
-  
+
+          amount = CaajJournalAmount('testone', 'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED', 
+            '3a2570c5-15c4-2860-52a8-bff14f27a236', Decimal('0.005147'))
+
           assert len(caaj_list) == 2
-          assert cj.time == "2022-01-01 00:00:00"
-          assert cj.platform == "test_platform"
-          assert cj.transaction_id == "0x1111111111111111111111111111"
-          assert cj.comment == "no comment"
-          assert cj.debit_from == "0x0000000000000"
-          assert cj.debit_to == "0x11111111111"
-          assert cj.credit_from == "0x22222222222"
-          assert cj.credit_to == "0x33333333333"
-          assert cj.debit_title == "SPOT"
-          assert cj.debit_amount == amount
-          assert cj.credit_title == "SPOT"
-          assert cj.credit_amount == amount
+          assert cj.meta.time == "2022-01-01 00:00:00"
+          assert cj.meta.platform == "test_platform"
+          assert cj.meta.transaction_id == "0x1111111111111111111111111111"
+          assert cj.meta.comment == "no comment"
+          assert cj.debit.side_from == "0x0000000000000"
+          assert cj.debit.side_to == "0x11111111111"
+          assert cj.credit.side_from == "0x22222222222"
+          assert cj.credit.side_to == "0x33333333333"
+          assert cj.debit.title == "SPOT"
+          assert cj.debit.amounts[0].symbol == 'testone'
+          assert cj.debit.amounts[0].original_id == 'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED'
+          assert cj.debit.amounts[0].symbol_uuid == '3a2570c5-15c4-2860-52a8-bff14f27a236'
+          assert cj.credit.title == "SPOT"
+          assert cj.credit.amounts[0].symbol == 'testone'
+          assert cj.credit.amounts[0].original_id == 'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED'
+          assert cj.credit.amounts[0].symbol_uuid == '3a2570c5-15c4-2860-52a8-bff14f27a236'
 
   def test_get_caaj_csv(self):
     with patch.object(SenkaLib, 'get_available_chain', new=TestSenka.mock_get_available_chains):
@@ -66,40 +64,38 @@ class TestSenka(unittest.TestCase):
           caaj_csv = senka.get_caaj_csv('test_one', '0xfFceBED170CE0230D513a0a388011eF9c2F97503')
           caaj_csv_lines = caaj_csv.splitlines()
           assert len(caaj_csv_lines) == 3
-          assert caaj_csv_lines[0] == 'time,platform,transaction_id,comment,debit_from,debit_to,\
-credit_from,credit_to,debit_title,debit_amount,credit_title,credit_amount'
+          assert caaj_csv_lines[0] == 'time,platform,transaction_id,debit_title,debit_amounts,debit_from,debit_to,\
+credit_title,credit_amounts,credit_from,credit_to,comment'
           assert caaj_csv_lines[1] == '2022-01-01 00:00:00,test_platform,0x1111111111111111111111111111,\
-no comment,0x0000000000000,0x11111111111,0x22222222222,0x33333333333,\
 SPOT,\
 "[{\'token\': \
 {\'symbol\': \'testone\', \
 \'original_id\': \
 \'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED\', \
 \'symbol_uuid\': \'3a2570c5-15c4-2860-52a8-bff14f27a236\'}, \
-\'amount\': \'10\'}]",\
+\'amount\': Decimal(\'0.005147\')}]",0x0000000000000,0x11111111111,\
 SPOT,\
 "[{\'token\': \
 {\'symbol\': \'testone\', \
 \'original_id\': \
 \'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED\', \
 \'symbol_uuid\': \'3a2570c5-15c4-2860-52a8-bff14f27a236\'}, \
-\'amount\': \'10\'}]"'
+\'amount\': Decimal(\'0.005147\')}]",0x22222222222,0x33333333333,no comment'
           assert caaj_csv_lines[2] == '2022-01-01 00:00:00,test_platform,0x1111111111111111111111111111,\
-no comment,0x0000000000000,0x11111111111,0x22222222222,0x33333333333,\
 SPOT,\
 "[{\'token\': \
 {\'symbol\': \'testone\', \
 \'original_id\': \
 \'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED\', \
 \'symbol_uuid\': \'3a2570c5-15c4-2860-52a8-bff14f27a236\'}, \
-\'amount\': \'10\'}]",\
+\'amount\': Decimal(\'0.005147\')}]",0x0000000000000,0x11111111111,\
 SPOT,\
 "[{\'token\': \
 {\'symbol\': \'testone\', \
 \'original_id\': \
 \'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED\', \
 \'symbol_uuid\': \'3a2570c5-15c4-2860-52a8-bff14f27a236\'}, \
-\'amount\': \'10\'}]"'
+\'amount\': Decimal(\'0.005147\')}]",0x22222222222,0x33333333333,no comment'
 
   @classmethod
   def mock_get_available_chains(cls):
