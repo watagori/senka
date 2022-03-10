@@ -1,6 +1,5 @@
 from typing import List
 import importlib
-import os
 import re
 from traceback import format_exception
 from sys import exc_info

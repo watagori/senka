@@ -1,4 +1,5 @@
 
+from gettext import translation
 from xmlrpc.client import boolean
 from senkalib.chain.transaction import Transaction
 from senkalib.caaj_journal import CaajJournal
@@ -13,7 +14,10 @@ class TestOnePlugin():
 
   @classmethod
   def can_handle(cls, transaction:Transaction) -> boolean:
-    return True
+    if transaction.transaction_id != 'unknown':
+      return True
+    else:
+      return False
 
   @classmethod
   def get_caajs(cls, address:str, transaction:Transaction, token_original_ids:List) -> List[CaajJournal]:

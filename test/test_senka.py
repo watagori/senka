@@ -35,11 +35,11 @@ class TestSenka(unittest.TestCase):
     with patch.object(SenkaLib, 'get_available_chain', new=TestSenka.mock_get_available_chains):
       with patch.object(SenkaLib, 'get_token_original_ids', new=TestSenka.mock_get_token_original_ids):
         senka = Senka({}, '%s/test_senka_plugin.toml' % os.path.dirname(__file__))
-        caaj_list = senka.get_caaj('test_one', '0xfFceBED170CE0230D513a0a388011eF9c2F97503')
+        caaj_list, unknown_transactions_list = senka.get_caaj('test_one', '0xfFceBED170CE0230D513a0a388011eF9c2F97503')
         cj = caaj_list[0]
-        amount = CaajJournalAmount('testone', 'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED', 
-          '3a2570c5-15c4-2860-52a8-bff14f27a236', Decimal('0.005147'))
+        unknown_transaction = unknown_transactions_list[0]
         assert len(caaj_list) == 2
+        assert len(unknown_transactions_list) == 1
         assert cj.meta.time == "2022-01-01 00:00:00"
         assert cj.meta.platform == "test_platform"
         assert cj.meta.transaction_id == "0x1111111111111111111111111111"
@@ -56,6 +56,10 @@ class TestSenka(unittest.TestCase):
         assert cj.credit.amounts[0].symbol == 'testone'
         assert cj.credit.amounts[0].original_id == 'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED'
         assert cj.credit.amounts[0].symbol_uuid == '3a2570c5-15c4-2860-52a8-bff14f27a236'
+        assert unknown_transaction.transaction_id == 'unknown'
+        assert unknown_transaction.chain == 'test_one'
+        assert unknown_transaction.address == '0xfFceBED170CE0230D513a0a388011eF9c2F97503'
+        assert unknown_transaction.reason == 'there is no applicable plugin'
 
   def test_get_caaj_csv(self):
     with patch.object(SenkaLib, 'get_available_chain', new=TestSenka.mock_get_available_chains):
@@ -114,7 +118,9 @@ class OneTransactionGenerator(TransactionGenerator):
     receipt = json.loads(Path('%s/testdata/approve.json' % os.path.dirname(__file__)).read_text())
     transaction_a = OneTransaction(header['hash'], receipt, header['timeStamp'], header['gasUsed'], header['gasPrice'])
     transaction_b = OneTransaction(header['hash'], receipt, header['timeStamp'], header['gasUsed'], header['gasPrice'])
-    return [transaction_a, transaction_b]
+    transaction_unknown = OneTransaction('unknown', receipt, header['timeStamp'], header['gasUsed'], header['gasPrice'])
+
+    return [transaction_a, transaction_b, transaction_unknown]
 
 class OneTransaction(Transaction):
   chain = 'test_one'
