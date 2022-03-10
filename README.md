@@ -21,6 +21,7 @@ $ cd /app
 $ curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python -
 $ poetry config virtualenvs.in-project true && poetry install
 $ poetry shell
+$ pytest --cov=src --cov-branch --cov-report=term-missing -vv
 ```
 
 
