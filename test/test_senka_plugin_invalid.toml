@@ -1,0 +1,4 @@
+[senka.plugin]
+senka_plugin = [
+    'test_none_plugin'
+]

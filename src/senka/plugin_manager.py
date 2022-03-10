@@ -4,24 +4,22 @@ import os
 import re
 from traceback import format_exception
 from sys import exc_info
+import toml
 
 class PluginManager():
   @classmethod
-  def get_plugins(cls, chain:str, path:str) -> List:
+  def get_plugins(cls, chain:str, setting_toml_path:str) -> List:
     try:
+      obj = toml.load(setting_toml_path)
       plugins = []
-      files = os.listdir(path)
-      dirs = sorted([f for f in files if os.path.isdir(os.path.join(path, f)) and "_plugin" in f and "." not in f])
-      for dir in dirs:
-        module = importlib.import_module(f"plugin.{dir}.{dir}", "plugin")
-        dir = list(dir)
-        dir[0] = dir[0].upper()
-        dir = "".join(dir)
-        dir = re.sub("_(.)",lambda x:x.group(1).upper(), dir)
+      for module_name in obj['senka']['plugin']['senka_plugin']:
+        module = importlib.import_module(f"{module_name}.{module_name}", "module_name")
+        dir = re.sub("_(.)",lambda x:x.group(1).upper(), module_name)
+        dir = dir[0].upper() + dir[1:]
         plugin_class = getattr(module, dir)
         if plugin_class.chain.lower() == chain.lower(): plugins.append(plugin_class)
       return plugins
     except Exception as e:
       etype, value, tb= exc_info()
       info= format_exception(etype, value, tb)[-2]
-      raise RuntimeError(f"Failed to get plugins. check {path} has appropriate senka plugins. Exception in{info}")
+      raise RuntimeError(f"Failed to get plugin. plugin name: {module_name}. Exception in{info}")
