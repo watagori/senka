@@ -3,9 +3,6 @@ from gettext import translation
 from xmlrpc.client import boolean
 from senkalib.chain.transaction import Transaction
 from senkalib.caaj_journal import CaajJournal
-from senkalib.caaj_journal_meta import CaajJournalMeta
-from senkalib.caaj_journal_amount import CaajJournalAmount
-from senkalib.caaj_journal_side import CaajJournalSide
 from decimal import Decimal
 from typing import List
 
@@ -21,12 +18,21 @@ class TestOnePlugin():
 
   @classmethod
   def get_caajs(cls, address:str, transaction:Transaction, token_original_ids:List) -> List[CaajJournal]:
-    meta = CaajJournalMeta("2022-01-01 00:00:00", "test_platform", 
-      "0x1111111111111111111111111111", "no comment")
-    amounts = [CaajJournalAmount('testone', 'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED', 
-      '3a2570c5-15c4-2860-52a8-bff14f27a236', Decimal('0.005147'))]
-    caaj_debit = CaajJournalSide("0x0000000000000", "0x11111111111", 'SPOT', amounts)
-    caaj_credit = CaajJournalSide("0x22222222222", "0x33333333333", 'SPOT', amounts)
-    caaj = CaajJournal(meta, caaj_debit, caaj_credit)
+    executed_at = '2022-01-12 11:11:11'
+    chain = 'chain'
+    platform = 'platform'
+    application = 'application'
+    transaction_id = '0x36512c7e09e3570dfc53176252678ee9617660550d36f4da797afba6fc55bba6'
+    trade_uuid = 'bbbbbbddddddd'
+    type = 'deposit'
+    amount = Decimal('0.005147')
+    token_symbol = 'testone'
+    token_original_id = 'ibc/46B44899322F3CD854D2D46DEEF881958467CDD4B3B10086DA49296BBED94BED'
+    token_symbol_uuid = '3a2570c5-15c4-2860-52a8-bff14f27a236'
+    caaj_from = '0x111111111111111111111'
+    caaj_to = '0x222222222222222222222'
+    comment = 'hello world'
 
-    return [caaj]
+    cj = CaajJournal(executed_at, chain, platform, application, transaction_id, trade_uuid,
+      type, amount, token_symbol, token_original_id, token_symbol_uuid, caaj_from, caaj_to, comment)
+    return [cj]
