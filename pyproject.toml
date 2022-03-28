@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "senka"
-version = "0.0.5"
+version = "0.1.0"
 description = "making journal for transactions on blockchain"
 authors = ["settler"]
 
