@@ -6,6 +6,7 @@ from senkalib.caaj_journal import CaajJournal
 from senka.plugin_manager import PluginManager
 import pandas as pd
 
+
 pd.set_option("display.max_columns", 50)
 
 class Senka:
@@ -16,9 +17,9 @@ class Senka:
  
   def get_caaj_csv(self, chain:str, address:str) -> str:
     caaj_list, unknown_transactions_list = self.get_caaj(chain, address)
-    caaj_dict_list = SenkaLib.get_caaj_jounal_dicts(caaj_list)
+    caaj_dict_list = list(map(lambda x: vars(x), caaj_list))
     df = pd.DataFrame(caaj_dict_list)
-    df = df.sort_values('time')
+    df = df.sort_values('executed_at')
     caaj_csv = df.to_csv(None, index=False)
     return caaj_csv
 
