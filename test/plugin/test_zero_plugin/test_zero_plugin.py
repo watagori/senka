@@ -1,15 +1,23 @@
-from xmlrpc.client import boolean
-from senkalib.chain.transaction import Transaction 
-from senkalib.caaj_journal import CaajJournal
 from typing import List
+from xmlrpc.client import boolean
 
-class TestZeroPlugin():
-  chain = 'test_zero'
+from senkalib.caaj_journal import CaajJournal
+from senkalib.chain.transaction import Transaction
+from senkalib.token_original_id_table import TokenOriginalIdTable
 
-  @classmethod
-  def can_handle(cls, transaction:Transaction) -> boolean:
-    pass
 
-  @classmethod
-  def get_caajs(cls, address:str, transaction:Transaction, token_original_ids:List) -> CaajJournal:
-    pass
+class TestZeroPlugin:
+    chain = "test_zero"
+
+    @classmethod
+    def can_handle(cls, transaction: Transaction) -> boolean:
+        return True
+
+    @classmethod
+    def get_caajs(
+        cls,
+        address: str,
+        transaction: Transaction,
+        token_original_ids: TokenOriginalIdTable,
+    ) -> List[CaajJournal]:
+        return []
