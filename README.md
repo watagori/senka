@@ -18,7 +18,7 @@ $ docker-compose down --rmi all --volumes --remove-orphans
 
 ```
 $ cd /app
-$ curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python -
+$ curl -sSL https://install.python-poetry.org | python -
 $ poetry config virtualenvs.in-project true && poetry install
 $ poetry shell
 $ pytest --cov=src --cov-branch --cov-report=term-missing -vv
