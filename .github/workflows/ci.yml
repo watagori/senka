@@ -20,5 +20,5 @@ jobs:
         run: python -V
       - name: Install dependencies
         run: poetry config virtualenvs.in-project true && poetry install
-      - name: Run Python
+      - name: Run pytest
         run: poetry run pytest -v --cov=src
