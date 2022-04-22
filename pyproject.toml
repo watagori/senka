@@ -9,8 +9,9 @@ python = "^3.9"
 web3 = "^5.28.0"
 bscscan-python = "^2.0.0"
 pandas = "^1.4.1"
-senkalib = "latest"
+senkalib = {git = 'https://github.com/kouMatsumoto/senkalib.git', rev = '0f5ec518297834bc5a4c3ead16604cc8ef28f842' }
 toml = "^0.10.2"
+osmosis_plugin = {git = 'https://github.com/ca3-caaip/osmosis_plugin.git' }
 
 [tool.poetry.group.development.dependencies]
 flake8 = "^4.0.1"
@@ -26,4 +27,4 @@ isort = "^5.10.1"
 profile = "black"
 
 [senka.plugin]
-senka_plugin = []
+senka_plugin = ['osmosis_plugin']
