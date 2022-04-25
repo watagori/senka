@@ -9,7 +9,7 @@ python = "^3.9"
 web3 = "^5.28.0"
 bscscan-python = "^2.0.0"
 pandas = "^1.4.1"
-senkalib = {git = 'https://github.com/kouMatsumoto/senkalib.git', rev = '0f5ec518297834bc5a4c3ead16604cc8ef28f842' }
+senkalib = {git = 'https://github.com/kouMatsumoto/senkalib.git', rev = 'ed9d8841aca110a448a5606eda814db50c9c9834' }
 toml = "^0.10.2"
 osmosis_plugin = {git = 'https://github.com/ca3-caaip/osmosis_plugin.git' }
 
