@@ -20,8 +20,8 @@ class Senka:
         self.setting_toml_path = setting_toml_path
         pass
 
-    def get_caaj_csv(self, chain: str, address: str) -> str:
-        caaj_list, unknown_transactions_list = self.get_caaj(chain, address)
+    def get_caaj_csv(self, chain: str, address: str, starttime: int = None, endtime: int = None, startblock: int = None, endblock: int = None) -> str:
+        caaj_list, unknown_transactions_list = self.get_caaj(chain, address, starttime=starttime, endtime=endtime, startblock=startblock, endblock=endblock)
         caaj_dict_list = list(map(lambda x: vars(x), caaj_list))
         df = pd.DataFrame(caaj_dict_list)
         df = df.sort_values("executed_at")
@@ -29,7 +29,7 @@ class Senka:
         return caaj_csv
 
     def get_caaj(
-        self, chain: str, address: str
+        self, chain: str, address: str, starttime: int = None, endtime: int = None, startblock: int = None, endblock: int = None
     ) -> Tuple[List[CaajJournal], List[UnknownTransaction]]:
         token_original_ids = TokenOriginalIdTable(Senka.TOKEN_ORIGINAL_IDS_URL)
         available_chains = self.get_available_chains()
@@ -44,7 +44,7 @@ class Senka:
                 SenkaLib.get_available_chain(),
             )
         )[0]
-        transactions = transaction_generator.get_transactions(self.setting, address)
+        transactions = transaction_generator.get_transactions(self.setting, address, starttime=starttime, endtime=endtime, startblock=startblock, endblock=endblock)
         plugins = PluginManager.get_plugins(chain, self.setting_toml_path)
 
         for transaction in transactions:
