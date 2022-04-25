@@ -127,8 +127,10 @@ class OneTransactionGenerator(TransactionGenerator):
         cls,
         settings: SenkaSetting,
         address: str,
-        timerange: Union[dict, None] = None,
-        blockrange: Union[dict, None] = None,
+        starttime: Union[int, None] = None,
+        endtime: Union[int, None] = None,
+        startblock: Union[int, None] = None,
+        endblock: Union[int, None] = None,
     ) -> List[Transaction]:
         header = json.loads(
             Path("%s/testdata/header.json" % os.path.dirname(__file__)).read_text()
@@ -193,8 +195,10 @@ class ZeroTransactionGenerator(TransactionGenerator):
         cls,
         settings: SenkaSetting,
         address: str,
-        timerange: Union[dict, None] = None,
-        blockrange: Union[dict, None] = None,
+        starttime: Union[int, None] = None,
+        endtime: Union[int, None] = None,
+        startblock: Union[int, None] = None,
+        endblock: Union[int, None] = None,
     ) -> List[Transaction]:
         return []
 
