@@ -64,9 +64,9 @@ $ pytest --cov=src --cov-branch --cov-report=term-missing -vv
 2. Add plugin pacakage to list of `senka_plugin` variable of `[senka.plugin]` section in `pyproject.toml`.
 
 ex. Here is a part of `pyproject.toml`. Now osmosis_plugin is activated in this example.
-
 ```
 
+```text
 [tool.poetry.dependencies]
 python = "^3.8"
 web3 = "^5.28.0"
@@ -78,9 +78,8 @@ osmosis_plugin = {git = 'https://github.com/ca3-caaip/osmosis_plugin.git', rev =
 
 [senka.plugin]
 senka_plugin = [
-'osmosis_plugin'
+    'osmosis_plugin'
 ]
-
 ```
 
 change plugin repository url for what you want.
@@ -102,4 +101,7 @@ $ python src/main.py osmosis 0x0000000000000000000000000000000000000 > result.cs
 ```
 
 change chain or address whatever you want to check.
+
+```
+
 ```
