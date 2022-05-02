@@ -24,29 +24,38 @@ $ docker-compose down --rmi all --volumes --remove-orphans
 
 ```
 If you have not yet installed poetry, first install poetry as follows
-Set the poetry path as the log shows.
 $ curl -sSL https://install.python-poetry.org | python3 -
+Set the poetry path as the log shows.
+$ export PATH="$HOME/.local/bin:$PATH"
+```
 
 Set up the python environment as follows.
 $ poetry config virtualenvs.in-project true && poetry install
+
 ```
 
 2. Install pre-commit
 
 ```
+
 # Before committing, we use pre-commmit hook to check the code style.
+
 # Install pre-commit in the following way
+
 $ pre-commit install
+
 ```
 
 ## for test
 
 ```
+
 $ cd /app
 $ curl -sSL https://install.python-poetry.org | python -
 $ poetry config virtualenvs.in-project true && poetry install
 $ poetry shell
 $ pytest --cov=src --cov-branch --cov-report=term-missing -vv
+
 ```
 
 ## for adding plugin
@@ -55,6 +64,7 @@ $ pytest --cov=src --cov-branch --cov-report=term-missing -vv
 2. Add plugin pacakage to list of `senka_plugin` variable of `[senka.plugin]` section in `pyproject.toml`.
 
 ex. Here is a part of `pyproject.toml`. Now osmosis_plugin is activated in this example.
+```
 
 ```
 [tool.poetry.dependencies]
@@ -77,14 +87,17 @@ change plugin repository url for what you want.
 ## for execution from CLI
 
 ```
+
 $ cd /app/
 $ curl -sSL https://install.python-poetry.org | python -
 $ poetry config virtualenvs.in-project true && poetry install
 $ poetry shell
+
 # python src/main chain_name address > result.csv
 
 ex.
 $ python src/main.py osmosis 0x0000000000000000000000000000000000000 > result.csv
+
 ```
 
 change chain or address whatever you want to check.
