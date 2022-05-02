@@ -1,18 +1,43 @@
 # senka
 
-
 ## docker
+
 ### for start
+
 $ docker-compose up -d
 
 ### for access to shell in the container
+
 $ docker-compose exec senka bash
 
 ### for end
+
 $ docker-compose down
 
 ### for remove
+
 $ docker-compose down --rmi all --volumes --remove-orphans
+
+## for developers
+
+1. Install poetry to set up python environment
+
+```
+If you have not yet installed poetry, first install poetry as follows
+Set the poetry path as the log shows.
+$ curl -sSL https://install.python-poetry.org | python3 -
+
+Set up the python environment as follows.
+$ poetry config virtualenvs.in-project true && poetry install
+```
+
+2. Install pre-commit
+
+```
+# Before committing, we use pre-commmit hook to check the code style.
+# Install pre-commit in the following way
+$ pre-commit install
+```
 
 ## for test
 
@@ -23,7 +48,6 @@ $ poetry config virtualenvs.in-project true && poetry install
 $ poetry shell
 $ pytest --cov=src --cov-branch --cov-report=term-missing -vv
 ```
-
 
 ## for adding plugin
 
