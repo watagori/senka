@@ -27,22 +27,19 @@ If you have not yet installed poetry, first install poetry as follows
 $ curl -sSL https://install.python-poetry.org | python3 -
 Set the poetry path as the log shows.
 $ export PATH="$HOME/.local/bin:$PATH"
-```
-
 Set up the python environment as follows.
 $ poetry config virtualenvs.in-project true && poetry install
-
 ```
 
 2. Install pre-commit
 
 ```
-
 # Before committing, we use pre-commmit hook to check the code style.
-
 # Install pre-commit in the following way
-
 $ pre-commit install
+
+# If you are using docker and the venv environment is not enabled, please do the following to enable it.
+$ source /app/.venv/bin/activate
 
 ```
 
@@ -64,9 +61,9 @@ $ pytest --cov=src --cov-branch --cov-report=term-missing -vv
 2. Add plugin pacakage to list of `senka_plugin` variable of `[senka.plugin]` section in `pyproject.toml`.
 
 ex. Here is a part of `pyproject.toml`. Now osmosis_plugin is activated in this example.
-```
 
 ```
+
 [tool.poetry.dependencies]
 python = "^3.8"
 web3 = "^5.28.0"
@@ -80,6 +77,7 @@ osmosis_plugin = {git = 'https://github.com/ca3-caaip/osmosis_plugin.git', rev =
 senka_plugin = [
     'osmosis_plugin'
 ]
+
 ```
 
 change plugin repository url for what you want.
@@ -97,7 +95,6 @@ $ poetry shell
 
 ex.
 $ python src/main.py osmosis 0x0000000000000000000000000000000000000 > result.csv
-
 ```
 
 change chain or address whatever you want to check.
