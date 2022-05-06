@@ -75,7 +75,7 @@ osmosis_plugin = {git = 'https://github.com/ca3-caaip/osmosis_plugin.git', rev =
 
 [senka.plugin]
 senka_plugin = [
-'osmosis_plugin'
+    'osmosis_plugin'
 ]
 
 ```
