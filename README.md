@@ -64,8 +64,6 @@ ex. Here is a part of `pyproject.toml`. Now osmosis_plugin is activated in this 
 
 ```
 
-```
-
 [tool.poetry.dependencies]
 python = "^3.8"
 web3 = "^5.28.0"
@@ -97,8 +95,6 @@ $ poetry shell
 
 ex.
 $ python src/main.py osmosis 0x0000000000000000000000000000000000000 > result.csv
-
 ```
 
 change chain or address whatever you want to check.
-```
