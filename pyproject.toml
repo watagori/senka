@@ -9,7 +9,7 @@ python = "^3.9"
 web3 = "^5.28.0"
 bscscan-python = "^2.0.0"
 pandas = "^1.4.1"
-senkalib = {git = 'https://github.com/ca3-caaip/senkalib.git', rev = 'fcc5e23686b4697401eb17ff94e8130d90b811eb' }
+senkalib = { git = 'https://github.com/ca3-caaip/senkalib.git', rev = 'ebc3a8c859a875e448b7413984dab0c18f14864f' }
 toml = "^0.10.2"
 
 [tool.poetry.dev-dependencies]
@@ -27,3 +27,7 @@ profile = "black"
 
 [senka.plugin]
 senka_plugin = []
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
