@@ -26,7 +26,7 @@ isort = "^5.10.1"
 profile = "black"
 
 [senka.plugin]
-senka_plugin = ['osmosis_plugin']
+senka_plugin = []
 
 [build-system]
 requires = ["poetry-core"]
