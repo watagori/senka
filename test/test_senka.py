@@ -114,6 +114,57 @@ transaction_id,trade_uuid,type,amount,token_symbol,token_original_id,token_symbo
 3a2570c5-15c4-2860-52a8-bff14f27a236,0x111111111111111111111,0x222222222222222222222,hello world"
             )
 
+    def test_get_caaj_from_data(self):
+        data = Path(
+            "%s/../test/testdata/bitbank/bitbank_exchange.csv"
+            % os.path.dirname(__file__)
+        ).read_text()
+        setting = {}
+        senka = Senka(setting, "./pyproject.toml")
+        chain = "bitbank"
+
+        caajs = senka.get_caaj_from_data(chain, data)[0]
+        assert caajs[0].executed_at == "2022/03/14 11:55:24"
+        assert caajs[0].chain == "bitbank"
+        assert caajs[0].platform == "bitbank"
+        assert caajs[0].application == "exchange"
+        assert caajs[0].transaction_id == "1215140489"
+        assert caajs[0].type == "lose"
+        assert caajs[0].amount == Decimal("59577.0126674")
+        assert caajs[0].token_symbol == "jpy"
+        assert caajs[0].token_original_id == "jpy"
+        assert caajs[0].caaj_from == "self"
+        assert caajs[0].caaj_to == "bitbank"
+        assert caajs[0].comment == ""
+
+        assert caajs[1].executed_at == "2022/03/14 11:55:24"
+        assert caajs[1].chain == "bitbank"
+        assert caajs[1].platform == "bitbank"
+        assert caajs[1].application == "exchange"
+        assert caajs[1].transaction_id == "1215140489"
+        assert caajs[1].type == "get"
+        assert caajs[1].amount == Decimal("537.8006")
+        assert caajs[1].token_symbol == "mona"
+        assert caajs[1].token_original_id == "mona"
+        assert caajs[1].caaj_from == "self"
+        assert caajs[1].caaj_to == "bitbank"
+        assert caajs[1].comment == ""
+
+        assert caajs[2].executed_at == "2022/03/14 11:55:24"
+        assert caajs[2].chain == "bitbank"
+        assert caajs[2].platform == "bitbank"
+        assert caajs[2].application == "exchange"
+        assert caajs[2].transaction_id == "1215140489"
+        assert caajs[2].type == "lose"
+        assert caajs[2].amount == Decimal("71.4924")
+        assert caajs[2].token_symbol == "jpy"
+        assert caajs[2].token_original_id == "jpy"
+        assert caajs[2].caaj_from == "self"
+        assert caajs[2].caaj_to == "bitbank"
+        assert caajs[2].comment == ""
+
+        assert len(caajs) == 9
+
     @classmethod
     def mock_get_available_chains(cls):
         return [OneTransactionGenerator, ZeroTransactionGenerator]
