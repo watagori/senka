@@ -95,8 +95,8 @@ senkalib = {git = 'https://github.com/watagori/senkalib.git', rev = '6010f996141
 [package.source]
 type = "git"
 url = 'https://github.com/watagori/bitbank_plugin.git'
-reference = 'a3aff8a792a6a7530d05ed2815f2f5a8679a3dbe'
-resolved_reference = "a3aff8a792a6a7530d05ed2815f2f5a8679a3dbe"
+reference = 'e1f98405a1739a5738f61c6b7f936451ce6cbb53'
+resolved_reference = "e1f98405a1739a5738f61c6b7f936451ce6cbb53"
 
 [[package]]
 name = "black"
@@ -988,7 +988,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "e7729115b4297c81326beb05bf2bd3dd278c00aadf5ffa05eaaae9f0c891f105"
+content-hash = "62e3a8aeeea2bc02ddb7141bad8de1392b5ea03a8e6a53925c7f3ea5ded7c935"
 
 [metadata.files]
 aiohttp = [

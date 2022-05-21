@@ -10,7 +10,6 @@ web3 = "^5.28.0"
 bscscan-python = "^2.0.0"
 pandas = "^1.4.1"
 senkalib = { git = 'https://github.com/watagori/senkalib.git', rev = '6010f996141f5fc5e0a07a19211366e87cc51411' }
-bitbank_plugin = {git = 'https://github.com/watagori/bitbank_plugin.git', rev ='a3aff8a792a6a7530d05ed2815f2f5a8679a3dbe' }
 
 toml = "^0.10.2"
 
@@ -28,7 +27,7 @@ isort = "^5.10.1"
 profile = "black"
 
 [senka.plugin]
-senka_plugin = ["bitbank_plugin"]
+senka_plugin = []
 
 [build-system]
 requires = ["poetry-core"]

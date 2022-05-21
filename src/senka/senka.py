@@ -57,8 +57,6 @@ class Senka:
         if chain.lower() not in available_chains:
             raise ValueError("this chain is not supported.")
 
-        caaj = []
-        unknown_transactions = []
         transaction_generator = list(
             filter(
                 lambda x: x.chain.lower() == chain.lower(),
@@ -75,6 +73,48 @@ class Senka:
         )
         plugins = PluginManager.get_plugins(chain, self.setting_toml_path)
 
+        return Senka._make_caaj_from_transaction_and_plugins(
+            transactions, plugins, token_original_ids, chain, address
+        )
+
+    def get_caaj_from_data(
+        self, chain: str, data: str
+    ) -> Tuple[List[CaajJournal], List[UnknownTransaction]]:
+        token_original_ids = TokenOriginalIdTable(Senka.TOKEN_ORIGINAL_IDS_URL)
+        available_chains = self.get_available_chains()
+        if chain.lower() not in available_chains:
+            raise ValueError("this chain is not supported.")
+
+        transaction_generator = list(
+            filter(
+                lambda x: x.chain.lower() == chain.lower(),
+                SenkaLib.get_available_chain(),
+            )
+        )[0]
+        transactions = transaction_generator.get_transaction_from_data(
+            self.setting, data
+        )
+        plugins = PluginManager.get_plugins(chain, self.setting_toml_path)
+
+        return Senka._make_caaj_from_transaction_and_plugins(
+            transactions, plugins, token_original_ids, chain, "self"
+        )
+
+    def get_available_chains(self) -> List[str]:
+        chains = SenkaLib.get_available_chain()
+        chains = list(map(lambda x: x.chain, chains))
+        return chains
+
+    @staticmethod
+    def _make_caaj_from_transaction_and_plugins(
+        transactions: List[CaajJournal],
+        plugins: list,
+        token_original_ids: TokenOriginalIdTable,
+        chain: str,
+        address: str,
+    ) -> Tuple[List[CaajJournal], List[UnknownTransaction]]:
+        caaj = []
+        unknown_transactions = []
         for transaction in transactions:
             for plugin in plugins:
                 if plugin.can_handle(transaction):
@@ -92,48 +132,4 @@ class Senka:
                         "there is no applicable plugin",
                     )
                 )
-
         return caaj, unknown_transactions
-
-    def get_caaj_from_data(
-        self, chain: str, data: str
-    ) -> Tuple[List[CaajJournal], List[UnknownTransaction]]:
-        token_original_ids = TokenOriginalIdTable(Senka.TOKEN_ORIGINAL_IDS_URL)
-        available_chains = self.get_available_chains()
-        if chain.lower() not in available_chains:
-            raise ValueError("this chain is not supported.")
-
-        caaj = []
-        unknown_transactions = []
-        transaction_generator = list(
-            filter(
-                lambda x: x.chain.lower() == chain.lower(),
-                SenkaLib.get_available_chain(),
-            )
-        )[0]
-        transactions = transaction_generator.get_transaction_from_data(
-            self.setting, data
-        )
-        plugins = PluginManager.get_plugins(chain, self.setting_toml_path)
-
-        for transaction in transactions:
-            for plugin in plugins:
-                if plugin.can_handle(transaction):
-                    caaj_peace = plugin.get_caajs(transaction, token_original_ids)
-                    caaj.extend(caaj_peace)
-                    break
-            else:
-                unknown_transactions.append(
-                    UnknownTransaction(
-                        chain,
-                        "self",
-                        transaction.transaction_id,
-                        "there is no applicable plugin",
-                    )
-                )
-        return caaj, unknown_transactions
-
-    def get_available_chains(self) -> List[str]:
-        chains = SenkaLib.get_available_chain()
-        chains = list(map(lambda x: x.chain, chains))
-        return chains
