@@ -111,7 +111,7 @@ class Senka:
                 SenkaLib.get_available_chain(),
             )
         )[0]
-        transactions = transaction_generator.get_transaction_from_csv(
+        transactions = transaction_generator.get_transaction_from_data(
             self.setting, data
         )
         plugins = PluginManager.get_plugins(chain, self.setting_toml_path)
