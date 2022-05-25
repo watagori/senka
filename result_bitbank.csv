@@ -1,0 +1,11 @@
+executed_at,chain,platform,application,transaction_id,trade_uuid,type,amount,token_symbol,token_original_id,token_symbol_uuid,caaj_from,caaj_to,comment
+2022/03/14 11:55:24,bitbank,bitbank,exchange,1215140489,3bb00bf5-80e2-4ee3-9b8f-00e0ce7d8e38,lose,59577.0126674,jpy,jpy,49253557-3114-48f2-a0cc-7d108d36fdbb,self,bitbank,
+2022/03/14 11:55:24,bitbank,bitbank,exchange,1215140489,3bb00bf5-80e2-4ee3-9b8f-00e0ce7d8e38,get,537.8006,mona,mona,a1f72b49-7f46-4b18-959d-8372d0af706a,self,bitbank,
+2022/03/14 11:55:24,bitbank,bitbank,exchange,1215140489,3bb00bf5-80e2-4ee3-9b8f-00e0ce7d8e38,lose,71.4924,jpy,jpy,49253557-3114-48f2-a0cc-7d108d36fdbb,self,bitbank,
+2022/03/14 11:55:24,bitbank,bitbank,exchange,1215140487,5743d209-98ab-4ff6-887a-d0a08062c970,lose,236.1160362,jpy,jpy,49253557-3114-48f2-a0cc-7d108d36fdbb,self,bitbank,
+2022/03/14 11:55:24,bitbank,bitbank,exchange,1215140487,5743d209-98ab-4ff6-887a-d0a08062c970,get,2.1318,mona,mona,a1f72b49-7f46-4b18-959d-8372d0af706a,self,bitbank,
+2022/03/14 11:55:24,bitbank,bitbank,exchange,1215140487,5743d209-98ab-4ff6-887a-d0a08062c970,lose,0.2833,jpy,jpy,49253557-3114-48f2-a0cc-7d108d36fdbb,self,bitbank,
+2022/03/14 11:55:24,bitbank,bitbank,exchange,1215140485,92364c03-a95f-4f71-9e4c-6c70e87740c4,lose,301.4974473,jpy,jpy,49253557-3114-48f2-a0cc-7d108d36fdbb,self,bitbank,
+2022/03/14 11:55:24,bitbank,bitbank,exchange,1215140485,92364c03-a95f-4f71-9e4c-6c70e87740c4,get,2.7223,mona,mona,a1f72b49-7f46-4b18-959d-8372d0af706a,self,bitbank,
+2022/03/14 11:55:24,bitbank,bitbank,exchange,1215140485,92364c03-a95f-4f71-9e4c-6c70e87740c4,lose,0.3618,jpy,jpy,49253557-3114-48f2-a0cc-7d108d36fdbb,self,bitbank,
+
