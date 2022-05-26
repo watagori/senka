@@ -65,6 +65,8 @@ class Senka:
                 SenkaLib.get_available_chain(),
             )
         )[0]
+
+        transaction_params["settings"] = self.setting
         transactions = transaction_generator.get_transactions(transaction_params)
         plugins = PluginManager.get_plugins(chain, self.setting_toml_path)
         address = ""
