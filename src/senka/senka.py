@@ -104,13 +104,13 @@ class Senka:
                     )
                     caaj.extend(caaj_peace)
                     break
-            else:
-                unknown_transactions.append(
-                    UnknownTransaction(
-                        chain,
-                        address,
-                        transaction.transaction_id,
-                        "there is no applicable plugin",
+                else:
+                    unknown_transactions.append(
+                        UnknownTransaction(
+                            chain,
+                            address,
+                            transaction.transaction_id,
+                            "there is no applicable plugin",
+                        )
                     )
-                )
         return caaj, unknown_transactions
