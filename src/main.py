@@ -28,7 +28,7 @@ if __name__ == "__main__":
         caaj = senka.get_caaj_csv("address", args.chain, args.address)
     elif args.chain is not None and args.data_path is not None:
         senka = Senka(setting, "./pyproject.toml")
-        data = Path(f"{os.path.dirname(__file__)}/../{args.data_path}").read_text()
+        data = Path(f"{os.path.abspath(args.data_path)}").read_text()
         caaj = senka.get_caaj_csv("csv", args.chain, data)
     else:
         raise Exception("Invalid arguments")
