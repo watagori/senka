@@ -94,7 +94,7 @@ senkalib = {git = 'https://github.com/watagori/senkalib.git'}
 
 [package.source]
 type = "git"
-url = 'https://github.com/watagori/bitbank_plugin.git'
+url = 'https://github.com/watagori/bitbank_plugin'
 reference = "HEAD"
 resolved_reference = "e247c810838f50d3dc8154c1538f0a3fd933f895"
 
@@ -693,7 +693,7 @@ diagrams = ["railroad-diagrams", "jinja2"]
 
 [[package]]
 name = "pyright"
-version = "1.1.252"
+version = "1.1.251"
 description = "Command line wrapper for pyright"
 category = "dev"
 optional = false
@@ -854,7 +854,7 @@ web3 = "^5.29.0"
 type = "git"
 url = 'https://github.com/watagori/senkalib.git'
 reference = "HEAD"
-resolved_reference = "aa625ae114e0b84fc090639f1a8825d06ba6cf6e"
+resolved_reference = "a4f632a5f6bf65fbdaca67b74b9f5bbb81eb148b"
 
 [[package]]
 name = "six"
@@ -988,7 +988,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "af29ea8afd863007dd803d1f4baaaaf45e740658cdd52df85d20ba1776d98e41"
+content-hash = "7148912db348ea124342e9ea1505927e3fa0201934073d163679097c0b7c91d5"
 
 [metadata.files]
 aiohttp = [
@@ -1546,8 +1546,8 @@ pyparsing = [
     {file = "pyparsing-3.0.9.tar.gz", hash = "sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb"},
 ]
 pyright = [
-    {file = "pyright-1.1.252-py3-none-any.whl", hash = "sha256:0f436ff34b32a9d67f81ffbe5087812ec84039bdd7ec82b471e54a9291b7eef5"},
-    {file = "pyright-1.1.252.tar.gz", hash = "sha256:df48c20fca2442f2f3016aa94943bc58221e14f071a23befd5248deff25726b5"},
+    {file = "pyright-1.1.251-py3-none-any.whl", hash = "sha256:ca71506d492500496236f568fa85091964f2376f070882f88c372e68261d5f8e"},
+    {file = "pyright-1.1.251.tar.gz", hash = "sha256:c0cc328dd8a7b6f1c120b16091e04f17912eda04d3328518dd6acded091b2f2d"},
 ]
 pyrsistent = [
     {file = "pyrsistent-0.18.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:df46c854f490f81210870e509818b729db4488e1f30f2a1ce1698b2295a878d1"},

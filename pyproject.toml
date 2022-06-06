@@ -9,8 +9,8 @@ python = "^3.9"
 web3 = "^5.28.0"
 bscscan-python = "^2.0.0"
 pandas = "^1.4.1"
-senkalib = { git = 'https://github.com/watagori/senkalib.git' }
-bitbank_plugin = { git = 'https://github.com/watagori/bitbank_plugin.git'}
+senkalib = { git = 'https://github.com/watagori/senkalib.git' , rev = "aa625ae114e0b84fc090639f1a8825d06ba6cf6e" }
+bitbank_plugin = { git = 'https://github.com/watagori/bitbank_plugin.git' , rev= "faa4ee9aa16b176c1435d84c8b976e26c4e943f5"}
 
 toml = "^0.10.2"
 
