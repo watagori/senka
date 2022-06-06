@@ -13,7 +13,7 @@ pd.set_option("display.max_columns", 50)
 
 
 class Senka:
-    TOKEN_ORIGINAL_IDS_URL = "https://raw.githubusercontent.com/ca3-caaip/token_original_id/master/token_original_id.csv"
+    TOKEN_ORIGINAL_IDS_URL = "https://raw.githubusercontent.com/watagori/token_original_id/master/token_original_id.csv"
 
     def __init__(self, setting_dict, setting_toml_path: str):
         self.setting = SenkaSetting(setting_dict)
