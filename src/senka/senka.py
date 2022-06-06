@@ -110,7 +110,7 @@ class Senka:
                             chain,
                             address,
                             transaction.transaction_id,
-                            "there is no applicable plugin",
+                            "there is no applicable plugins",
                         )
                     )
         return caaj, unknown_transactions
